@@ -1,4 +1,4 @@
-/* --- 2000s Web Aesthetic Stylesheet --- */
+/* --- 2000s Web Aesthetic Stylesheet (Mobile Optimized) --- */
 
 * {
     box-sizing: border-box;
@@ -24,16 +24,17 @@ body {
     font-family: "Tahoma", "Geneva", "Verdana", sans-serif;
     font-size: 11px;
     color: #cccccc;
-    padding: 20px;
+    padding: 10px; /* Reduced for better phone borders */
     line-height: 1.5;
 }
 
 #main-wrapper {
     max-width: 800px;
+    width: 100%;
     margin: 0 auto;
     background-color: #1a1a1a;
     border: 1px solid #333333;
-    padding: 15px;
+    padding: 12px;
     box-shadow: 0px 0px 10px #000000;
 }
 
@@ -47,10 +48,10 @@ body {
 
 #header-box h1 {
     font-family: "Trebuchet MS", Arial, sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     color: #b3a296;
     letter-spacing: -1px;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
 }
 
 #header-box .tagline {
@@ -58,18 +59,21 @@ body {
     font-style: italic;
     color: #777;
     margin-bottom: 12px;
+    padding: 0 5px;
 }
 
 #nav-bar {
     font-size: 11px;
     color: #555;
+    word-wrap: break-word;
 }
 
 #nav-bar a {
     color: #9c8c80;
     text-decoration: none;
     font-weight: bold;
-    padding: 0 4px;
+    padding: 2px 4px;
+    display: inline-block; /* Prevents awkward text snapping on small screens */
 }
 
 #nav-bar a:hover {
@@ -81,13 +85,14 @@ body {
 /* --- Content Layout --- */
 #content-grid {
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 200px 1fr; /* Side-by-side layout for desktop */
     gap: 15px;
 }
 
 /* --- Sidebar --- */
 #sidebar {
     font-size: 11px;
+    width: 100%;
 }
 
 .sidebar-section {
@@ -112,37 +117,41 @@ body {
     color: #aaa;
 }
 
-/* --- CSS PAGE SWITCHING LOGIC --- */
-.page-content {
-    display: none; /* Hide pages by default */
+/* --- Pages Container Logic --- */
+#pages-container {
+    width: 100%;
+    min-width: 0; /* Important: Fixes CSS grid content blowout on mobile */
 }
 
-/* Display Home by default, or display targeted pages when clicked */
+.page-content {
+    display: none; 
+}
+
 #home {
     display: block; 
 }
 
-/* When a specific element hash is targeted via URL nav, show it and hide siblings */
 .page-content:target {
     display: block;
 }
 .page-content:target ~ #home {
-    display: none; /* Hides default home page when another tab is active */
+    display: none; 
 }
 #home:target {
     display: block !important;
 }
 
-/* --- Diary Entries / Subpages --- */
+/* --- Diary Entries --- */
 .diary-entry {
     background-color: #222222;
     border: 1px solid #2d2d2d;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .entry-header {
     background-color: #2b2520;
-    padding: 6px 10px;
+    padding: 8px 10px;
     border-bottom: 1px solid #3d342d;
 }
 
@@ -166,6 +175,22 @@ body {
 
 .entry-body p {
     margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+/* Photo handling fix */
+.post-img-container {
+    width: 100%;
+    margin-bottom: 12px;
+    border: 1px solid #3a332d;
+    background-color: #151515;
+    padding: 4px;
+}
+
+.post-img-container img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .section-intro {
@@ -225,7 +250,6 @@ body {
     background: #332b24;
 }
 
-/* --- Vintage Style Elements --- */
 .quote-box {
     background-color: #1a1a1a;
     border-left: 2px solid #6b5e54;
@@ -254,15 +278,14 @@ body {
     line-height: 1.4;
 }
 
-/* --- Responsive Layout --- */
-@media (max-width: 600px) {
+/* --- CRITICAL RESPONSIVE REPAIR FOR PHONES --- */
+@media (max-width: 650px) {
     #content-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Stacks sidebar cleanly on top of entries */
+        gap: 10px;
     }
+    
     .retro-grid {
-        grid-template-columns: 1fr;
-    }
-    body {
-        padding: 5px;
+        grid-template-columns: 1fr; /* Drops images into a neat single column */
     }
 }
